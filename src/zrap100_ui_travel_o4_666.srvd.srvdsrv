@@ -1,12 +1,10 @@
-@EndUserText: {
-  label: 'Service Definition for ZRAP100_C_TRAVELTP_666'
-}
+@EndUserText.label: 'RAP O4'
 @ObjectModel: {
   leadingEntity: {
     name: 'ZRAP100_C_TRAVELTP_666'
   }
 }
-define service ZRAP100_UI_TRAVEL_O4_666
+define service Zrap100_ui_travel_o4_666
   provider contracts odata_v4_ui {
   expose ZRAP100_C_TRAVELTP_666 as Travel;
 }

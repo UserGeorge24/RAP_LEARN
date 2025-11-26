@@ -1,5 +1,0 @@
-@EndUserText.label: 'dddddddddd'
-define service Zrap_O2
-  provider contracts odata_v2_ui {
-  expose ZRAP100_C_TRAVELTP_666;
-}

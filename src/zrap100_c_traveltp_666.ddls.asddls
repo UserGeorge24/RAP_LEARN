@@ -1,62 +1,94 @@
 @Metadata.allowExtensions: true
 @Metadata.ignorePropagatedAnnotations: true
-@Endusertext: {
-  Label: '###GENERATED Core Data Service Entity'
+@Search.searchable: true
+@EndUserText: {
+  label: '##GENERATED travel app'
 }
-@Objectmodel: {
-  Sapobjectnodetype.Name: 'ZRAP100_ATRAV666'
+@ObjectModel: {
+  sapObjectNodeType.name: 'ZRAP100_ATRAV666'
 }
 @AccessControl.authorizationCheck: #MANDATORY
 define root view entity ZRAP100_C_TRAVELTP_666
-  provider contract TRANSACTIONAL_QUERY
+  provider contract transactional_query
   as projection on ZRAP100_R_TRAVELTP_666
-  association [1..1] to ZRAP100_R_TRAVELTP_666 as _BaseEntity on $projection.TRAVELID = _BaseEntity.TRAVELID
+  association [1..1] to ZRAP100_R_TRAVELTP_666 as _BaseEntity on $projection.TravelID = _BaseEntity.TravelID
 {
+
+// Enable full text search on selected fields
+  @Search.defaultSearchElement: true
+// Enable fuzzy search on selected fields
+  @Search.fuzzinessThreshold: 0.9
   key TravelID,
+  
+// Enable the full-text search, define a value help, and specified AgencyName as associated text
+  @Search.defaultSearchElement: true
+  @ObjectModel.text.element: ['AgencyName']
+// The content of the AgencyID field will be listed which belongs to /DMO/I_Agency CDS
+  @Consumption.valueHelpDefinition: [ {
+    entity.element: 'AgencyID', 
+    entity.name: '/DMO/I_Agency', 
+    useForValidation: true
+  } ]
   AgencyID,
+  _Agency.Name        as AgencyName,
+  @Search.defaultSearchElement: true
+  @ObjectModel.text.element: ['CustomerName']
+  @Consumption.valueHelpDefinition: [ {
+    entity.element: 'CustomerID', 
+    entity.name: '/DMO/I_Customer', 
+    useForValidation: true
+  } ]
   CustomerID,
+  _Customer.LastName  as CustomerName,
   BeginDate,
   EndDate,
   @Semantics: {
-    Amount.Currencycode: 'CurrencyCode'
+    amount.currencyCode: 'CurrencyCode'
   }
   BookingFee,
   @Semantics: {
-    Amount.Currencycode: 'CurrencyCode'
+    amount.currencyCode: 'CurrencyCode'
   }
   TotalPrice,
-  @Consumption: {
-    Valuehelpdefinition: [ {
-      Entity.Element: 'Currency', 
-      Entity.Name: 'I_CurrencyStdVH', 
-      Useforvalidation: true
-    } ]
-  }
+  @Consumption.valueHelpDefinition: [ {
+    entity.element: 'Currency', 
+    entity.name: 'I_Currency', 
+    useForValidation: true
+  } ]
   CurrencyCode,
   Description,
+  @ObjectModel.text.element: ['OverallStatusText']
+  @Consumption.valueHelpDefinition: [ {
+    entity.element: 'OverallStatus', 
+    entity.name: '/DMO/I_Overall_Status_VH', 
+    useForValidation: true
+  } ]
   OverallStatus,
+// localized means, that the text is provided in the user's language
+  _OverallStatus._Text.Text as OverallStatusText : localized,
   Attachment,
   MimeType,
   FileName,
   @Semantics: {
-    User.Createdby: true
+    user.createdBy: true
   }
   CreatedBy,
   @Semantics: {
-    Systemdatetime.Createdat: true
+    systemDateTime.createdAt: true
   }
   CreatedAt,
   @Semantics: {
-    User.Localinstancelastchangedby: true
+    user.localInstanceLastChangedBy: true
   }
   LocalLastChangedBy,
   @Semantics: {
-    Systemdatetime.Localinstancelastchangedat: true
+    systemDateTime.localInstanceLastChangedAt: true
   }
   LocalLastChangedAt,
   @Semantics: {
-    Systemdatetime.Lastchangedat: true
+    systemDateTime.lastChangedAt: true
   }
   LastChangedAt,
   _BaseEntity
+
 }

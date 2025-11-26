@@ -13,7 +13,8 @@ ENDCLASS.
 
 
 
-CLASS zcl_rap100_gen_data_666 IMPLEMENTATION.
+CLASS ZCL_RAP100_GEN_DATA_666 IMPLEMENTATION.
+
 
   METHOD if_oo_adt_classrun~main.
 
@@ -61,5 +62,4 @@ CLASS zcl_rap100_gen_data_666 IMPLEMENTATION.
     out->write( |[RAP100] Demo data generated for table ZRAP100_ATRAV{ group_id }. | ).
 
   ENDMETHOD.
-
 ENDCLASS.

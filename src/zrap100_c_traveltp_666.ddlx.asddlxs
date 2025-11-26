@@ -1,8 +1,16 @@
 @Metadata.layer: #CORE
 @UI.headerInfo.title.type: #STANDARD
 @UI.headerInfo.title.value: 'TravelID'
-@UI.headerInfo.description.type: #STANDARD
-@UI.headerInfo.description.value: 'TravelID'
+
+@UI: { 
+    headerInfo: {
+        typeName: 'Travel',
+        typeNamePlural: 'Travels',
+        imageUrl: 'Attachment',
+        description: { type: #STANDARD, value: 'TravelId' }
+         } 
+       }
+
 annotate view ZRAP100_C_TRAVELTP_666 with
 {
   @UI.facet: [ {
@@ -67,8 +75,9 @@ annotate view ZRAP100_C_TRAVELTP_666 with
   } ]
   EndDate;
   
+  @UI.hidden: true
   @UI.identification: [ {
-    position: 60 
+    position: 60
   } ]
   @UI.lineItem: [ {
     position: 60 
@@ -78,8 +87,9 @@ annotate view ZRAP100_C_TRAVELTP_666 with
   } ]
   BookingFee;
   
+  @UI.hidden: true
   @UI.identification: [ {
-    position: 70 
+    position: 70
   } ]
   @UI.lineItem: [ {
     position: 70 
@@ -89,8 +99,9 @@ annotate view ZRAP100_C_TRAVELTP_666 with
   } ]
   TotalPrice;
   
+  @UI.hidden: true
   @UI.identification: [ {
-    position: 80 
+    position: 80
   } ]
   @UI.lineItem: [ {
     position: 80 
@@ -101,7 +112,8 @@ annotate view ZRAP100_C_TRAVELTP_666 with
   Description;
   
   @UI.identification: [ {
-    position: 90 
+    position: 90 ,
+    importance: #HIGH
   } ]
   @UI.lineItem: [ {
     position: 90 
@@ -119,8 +131,9 @@ annotate view ZRAP100_C_TRAVELTP_666 with
   } ]
   Attachment;
   
+  @UI.hidden: true
   @UI.identification: [ {
-    position: 110 
+    position: 110
   } ]
   @UI.lineItem: [ {
     position: 110 
@@ -130,8 +143,9 @@ annotate view ZRAP100_C_TRAVELTP_666 with
   } ]
   MimeType;
   
+  @UI.hidden: true
   @UI.identification: [ {
-    position: 120 
+    position: 120
   } ]
   @UI.lineItem: [ {
     position: 120 
@@ -209,4 +223,6 @@ annotate view ZRAP100_C_TRAVELTP_666 with
     position: 180 
   } ]
   _BaseEntity;
+  
+  
 }
